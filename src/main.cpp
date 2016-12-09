@@ -1,20 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../include/window.hpp"
+#include "../include/game.hpp"
 
 using Hash = std::map<std::string, std::string>;
 
 int main()
 {
-        Hash options;
-        options.emplace("VideoMode", "200 200");
-        options.emplace("WindowName", "Platipus");
+        platipus::Game game;
 
-        platipus::Window window(options);
-
-        while (window.listen()) {
-                window.listenEvents();
-        }
+        game.run();
 
         return 0;
 }
