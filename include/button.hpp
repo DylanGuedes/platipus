@@ -16,6 +16,9 @@ namespace platipus {
                         void loadPosition(std::ifstream* mapData);
                         void drawSelf(sf::RenderWindow *canvas);
                         void onEvent(sf::Event e);
+                        virtual void handleMouseover(sf::Event e) = 0;
+                        virtual void handleClick(sf::Event e) = 0;
+                        virtual void handleClickOut(sf::Event e) = 0;
 
                 private:
                         sf::Texture* mTexture;

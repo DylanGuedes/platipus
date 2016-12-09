@@ -61,9 +61,20 @@ namespace platipus {
         void
         Button::onEvent(sf::Event e)
         {
-                if (e.type == sf::Event::MouseMoved) {
+                if (e.type == sf::Event::MouseButtonPressed) {
+                        std::cout << "pressed..\n";
+                        if (e.mouseButton.button == sf::Mouse::Right) {
+                                std::cout << "click..\n";
+                                if (e.mouseButton.x<=(mX+mWidth) && e.mouseButton.x>=mX && e.mouseButton.y>=mY && e.mouseButton.y<=(mY+mHeight)) {
+                                        handleClick(e);
+                                } else {
+                                        handleClickOut(e);
+                                }
+                        }
+                } else if (e.type == sf::Event::MouseMoved) {
                         if (e.mouseMove.x<=(mX+mWidth) && e.mouseMove.x>=mX && e.mouseMove.y>=mY && e.mouseMove.y<=(mY+mHeight)) {
                                 mSprite->setTexture(*mTextureHighlight);
+                                handleMouseover(e);
                         } else {
                                 mSprite->setTexture(*mTexture);
                         }

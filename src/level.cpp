@@ -1,6 +1,6 @@
 #include "../include/level.hpp"
 #include "../include/game.hpp"
-#include "../include/button.hpp"
+#include "../include/transition_button.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -36,8 +36,8 @@ namespace platipus {
         Level::handleEntityLoad(unsigned int entityType, std::ifstream* mapData)
         {
                 switch (entityType) {
-                        case platipus::entity::BUTTON:
-                                GameObject::addChild(new platipus::Button(mapData));
+                        case platipus::entity::TRANSITION_BUTTON:
+                                GameObject::addChild(new platipus::TransitionButton(mapData));
                                 break;
 
                         default:

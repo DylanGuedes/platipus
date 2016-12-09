@@ -6,7 +6,7 @@
 
 namespace platipus {
         namespace entity {
-                const unsigned int BUTTON = 0xFF0;
+                const unsigned int TRANSITION_BUTTON = 0xFF0;
         }
         class Game {
                 public:
