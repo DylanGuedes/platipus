@@ -1,23 +1,19 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "../include/window.hpp"
+
+using Hash = std::map<std::string, std::string>;
 
 int main()
 {
-        sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-        sf::CircleShape shape(100.f);
-        shape.setFillColor(sf::Color::Green);
+        Hash options;
+        options.emplace("VideoMode", "200 200");
+        options.emplace("WindowName", "Platipus");
 
-        while (window.isOpen())
-        {
-                sf::Event event;
-                while (window.pollEvent(event))
-                {
-                        if (event.type == sf::Event::Closed)
-                                window.close();
-                }
+        platipus::Window window(options);
 
-                window.clear();
-                window.draw(shape);
-                window.display();
+        while (window.listen()) {
+                window.listenEvents();
         }
 
         return 0;
