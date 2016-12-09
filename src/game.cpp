@@ -5,21 +5,21 @@
 namespace platipus {
         Game::Game()
         {
-                Hash options = load_options();
-                m_window = new platipus::Window(options);
+                Hash options = loadOptions();
+                mWindow = new platipus::Window(options);
         }
 
         Game::~Game()
         {
-                delete m_window;
+                delete mWindow;
         }
 
         Hash
-        Game::load_options()
+        Game::loadOptions()
         {
                 // TODO
                 Hash options;
-                options.emplace("VideoMode", "200 200");
+                options.emplace("VideoMode", "800 600");
                 options.emplace("WindowName", "Platipus");
                 return options;
         }
@@ -27,8 +27,8 @@ namespace platipus {
         void
         Game::run()
         {
-                while (m_window->listen()) {
-                        m_window->listenEvents();
+                while (mWindow->listen()) {
+                        mWindow->listenEvents();
                 }
         }
 }

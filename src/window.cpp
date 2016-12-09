@@ -5,36 +5,66 @@
 
 namespace platipus {
         Window::Window(Hash options) :
-                m_options(options)
+                mOptions(options)
         {
                 std::istringstream iss(options["VideoMode"]);
                 unsigned int width, height;
                 iss >> width >> height;
-                m_window = new sf::RenderWindow(sf::VideoMode(width, height), options["WindowName"]);
+                mWindow = new sf::RenderWindow(sf::VideoMode(width, height), options["WindowName"]);
+                mCurrentLevel = new platipus::Level("main-menu");
         }
 
         Window::~Window()
         {
-                delete m_window;
+                delete mWindow;
         }
 
         bool
         Window::listen() const
         {
-                return m_window->isOpen();
+                return mWindow->isOpen();
         }
 
         void
         Window::listenEvents()
         {
                 sf::Event event;
-                while (m_window->pollEvent(event))
+                while (mWindow->pollEvent(event))
                 {
                         if (event.type == sf::Event::Closed)
-                                m_window->close();
+                                mWindow->close();
                 }
 
-                m_window->clear();
-                m_window->display();
+                mWindow->clear(sf::Color::White);
+
+                updateSelf();
+                drawSelf(mWindow);
+                drawSelfAfter(mWindow);
+
+                mWindow->display();
+        }
+
+        void
+        Window::drawSelf(sf::RenderWindow *canvas)
+        {
+                GameObject::drawSelf(canvas);
+        }
+
+        platipus::Level*
+        Window::currentLevel() const
+        {
+                return mCurrentLevel;
+        }
+
+        void
+        Window::drawSelfAfter(sf::RenderWindow *canvas)
+        {
+                GameObject::drawSelf(canvas);
+        }
+
+        void
+        Window::updateSelf()
+        {
+                GameObject::updateSelf();
         }
 }

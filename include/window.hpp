@@ -4,10 +4,12 @@
 #include <iostream>
 #include <map>
 #include <SFML/Graphics.hpp>
+#include "../include/game_object.hpp"
+#include "level.hpp"
 
 namespace platipus {
         using Hash = std::map<std::string, std::string>;
-        class Window {
+        class Window : public platipus::GameObject {
                 public:
                         Window(std::map<std::string, std::string> options);
                         ~Window();
@@ -15,10 +17,15 @@ namespace platipus {
                         void listenEvents();
 
                 protected:
+                        void drawSelf(sf::RenderWindow *canvas);
+                        void drawSelfAfter(sf::RenderWindow *canvas);
+                        void updateSelf();
+                        platipus::Level *currentLevel() const;
 
                 private:
-                        sf::RenderWindow *m_window;
-                        Hash m_options;
+                        sf::RenderWindow *mWindow;
+                        Hash mOptions;
+                        platipus::Level *mCurrentLevel = nullptr;
         };
 }
 
