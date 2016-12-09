@@ -15,7 +15,8 @@ namespace platipus {
         void
         Button::loadPosition(std::ifstream *mapData)
         {
-                (*mapData) >> mWidth >> mHeight;
+                (*mapData) >> mX >> mY;
+                mSprite->setPosition(mX, mY);
         }
 
         void
@@ -24,6 +25,7 @@ namespace platipus {
                 std::string textureName;
 
                 if ((*mapData) >> textureName) {
+                        std::cout << textureName << "\n";
                         mTexture->loadFromFile(textureName);
                         mSprite = new sf::Sprite(*mTexture);
                         mTextureLoaded = true;

@@ -22,6 +22,8 @@ namespace platipus {
                         void setTexture(std::string name);
                         unsigned int mWidth = 0;
                         unsigned int mHeight = 0;
+                        double mX = 0.0;
+                        double mY = 0.0;
                         bool mTextureLoaded = false;
         };
 }
