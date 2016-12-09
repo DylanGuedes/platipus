@@ -17,8 +17,6 @@ namespace platipus {
                         void listenEvents();
 
                 protected:
-                        void drawSelf(sf::RenderWindow *canvas);
-                        void drawSelfAfter(sf::RenderWindow *canvas);
                         void updateSelf();
                         platipus::Level *currentLevel() const;
 

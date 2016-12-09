@@ -37,17 +37,12 @@ namespace platipus {
 
                 mWindow->clear(sf::Color::White);
 
-                updateSelf();
-                drawSelf(mWindow);
-                drawSelfAfter(mWindow);
+                update();
+                mCurrentLevel->update();
+                draw(mWindow);
+                mCurrentLevel->draw(mWindow);
 
                 mWindow->display();
-        }
-
-        void
-        Window::drawSelf(sf::RenderWindow *canvas)
-        {
-                GameObject::drawSelf(canvas);
         }
 
         platipus::Level*
@@ -57,14 +52,7 @@ namespace platipus {
         }
 
         void
-        Window::drawSelfAfter(sf::RenderWindow *canvas)
-        {
-                GameObject::drawSelf(canvas);
-        }
-
-        void
         Window::updateSelf()
         {
-                GameObject::updateSelf();
         }
 }

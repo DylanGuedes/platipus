@@ -3,38 +3,21 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace platipus {
         class GameObject {
                 public:
-                        GameObject(GameObject *parent=nullptr);
+                        GameObject();
                         virtual ~GameObject();
-
-                        void addChild(GameObject *child) {
-                                mChildren.push_back(child);
-                        }
+                        void addChild(GameObject *child);
+                        void update();
+                        void draw(sf::RenderWindow *);
 
                 protected:
-                        virtual void updateSelf() {
-                                for (auto it : mChildren) {
-                                        it->updateSelf();
-                                }
-                        }
-
-                        virtual void drawSelf(sf::RenderWindow *canvas) {
-                                for (auto it : mChildren) {
-                                        it->drawSelf(canvas);
-                                }
-                        }
-
-                        virtual void drawSelfAfter(sf::RenderWindow *canvas) {
-                                for (auto it : mChildren) {
-                                        it->drawSelfAfter(canvas);
-                                }
-                        }
-
-                private:
-                        GameObject *mParent;
+                        virtual void updateSelf() {}
+                        virtual void drawSelf(sf::RenderWindow *) {}
+                        virtual void drawSelfAfter(sf::RenderWindow *) {}
                         std::vector<GameObject *> mChildren;
 
         };

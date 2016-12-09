@@ -1,12 +1,12 @@
 #include "../include/level.hpp"
 #include "../include/game.hpp"
+#include "../include/button.hpp"
 
 #include <iostream>
 #include <fstream>
 
 namespace platipus {
-        Level::Level(std::string id) :
-                mId(id)
+        Level::Level(std::string id) : GameObject(), mId(id)
         {
                 loadLevel();
         }
@@ -24,8 +24,8 @@ namespace platipus {
                 unsigned int entityType;
 
                 if (mapData.is_open()) {
-                        while (mapData >> entityType) {
-                                handleEntityLoad(entityType, mapData);
+                        while (mapData >> std::hex >> entityType) {
+                                handleEntityLoad(entityType, &mapData);
                         }
                 }
 
@@ -33,11 +33,11 @@ namespace platipus {
         }
 
         void
-        Level::handleEntityLoad(unsigned int entityType, std::ifstream& mapData)
+        Level::handleEntityLoad(unsigned int entityType, std::ifstream* mapData)
         {
                 switch (entityType) {
                         case platipus::entity::BUTTON:
-                                // addChild(new platipus::Button(mapData));
+                                GameObject::addChild(new platipus::Button(mapData));
                                 break;
 
                         default:

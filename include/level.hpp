@@ -3,7 +3,7 @@
 
 #include "game_object.hpp"
 namespace platipus {
-        class Level : platipus::GameObject {
+        class Level : public platipus::GameObject {
                 public:
                         Level(std::string id);
                         ~Level();
@@ -14,7 +14,7 @@ namespace platipus {
 
                 private:
                         std::string mId;
-                        void handleEntityLoad(unsigned int entityType, std::ifstream& mapData);
+                        void handleEntityLoad(unsigned int entityType, std::ifstream* mapData);
         };
 }
 #endif
