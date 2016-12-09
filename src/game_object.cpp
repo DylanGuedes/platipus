@@ -36,4 +36,13 @@ namespace platipus {
         {
                 mChildren.push_back(child);
         }
+
+        void
+        GameObject::handleEvent(sf::Event e)
+        {
+                onEvent(e);
+                for (auto it : mChildren) {
+                        it->handleEvent(e);
+                }
+        }
 }

@@ -15,13 +15,14 @@ namespace platipus {
                         void loadTexture(std::ifstream* mapData);
                         void loadPosition(std::ifstream* mapData);
                         void drawSelf(sf::RenderWindow *canvas);
+                        void onEvent(sf::Event e);
 
                 private:
                         sf::Texture* mTexture;
+                        sf::Texture* mTextureHighlight;
                         sf::Sprite* mSprite;
-                        void setTexture(std::string name);
-                        unsigned int mWidth = 0;
-                        unsigned int mHeight = 0;
+                        double mWidth = 0.0;
+                        double mHeight = 0.0;
                         double mX = 0.0;
                         double mY = 0.0;
                         bool mTextureLoaded = false;

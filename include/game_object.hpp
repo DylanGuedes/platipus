@@ -13,11 +13,13 @@ namespace platipus {
                         void addChild(GameObject *child);
                         void update();
                         void draw(sf::RenderWindow *);
+                        void handleEvent(sf::Event);
 
                 protected:
                         virtual void updateSelf() {}
                         virtual void drawSelf(sf::RenderWindow *) {}
                         virtual void drawSelfAfter(sf::RenderWindow *) {}
+                        virtual void onEvent(sf::Event) {}
                         std::vector<GameObject *> mChildren;
 
         };

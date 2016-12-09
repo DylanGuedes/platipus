@@ -33,6 +33,9 @@ namespace platipus {
                 {
                         if (event.type == sf::Event::Closed)
                                 mWindow->close();
+                        else if (event.type == sf::Event::MouseMoved) {
+                                mCurrentLevel->handleEvent(event);
+                        }
                 }
 
                 mWindow->clear(sf::Color::White);

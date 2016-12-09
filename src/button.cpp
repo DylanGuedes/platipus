@@ -6,7 +6,8 @@
 
 namespace platipus {
         Button::Button(std::ifstream* mapData) :
-                mTexture(new sf::Texture)
+                mTexture(new sf::Texture),
+                mTextureHighlight(new sf::Texture)
         {
                 loadTexture(mapData);
                 loadPosition(mapData);
@@ -25,9 +26,15 @@ namespace platipus {
                 std::string textureName;
 
                 if ((*mapData) >> textureName) {
-                        std::cout << textureName << "\n";
                         mTexture->loadFromFile(textureName);
                         mSprite = new sf::Sprite(*mTexture);
+                }
+
+                if ((*mapData) >> textureName) {
+                        mTextureHighlight->loadFromFile(textureName);
+                }
+
+                if ((*mapData) >> mWidth >> mHeight) {
                         mTextureLoaded = true;
                 }
         }
@@ -35,13 +42,6 @@ namespace platipus {
         Button::~Button()
         {
                 delete mTexture;
-        }
-
-        void
-        Button::setTexture(std::string textureName)
-        {
-                std::string texturePath("res/" + textureName);
-                mTexture->loadFromFile(texturePath);
         }
 
         sf::Texture *
@@ -56,6 +56,17 @@ namespace platipus {
                 if (mTextureLoaded) {
                         canvas->draw(*mSprite);
                 }
-                GameObject::drawSelf(canvas);
+        }
+
+        void
+        Button::onEvent(sf::Event e)
+        {
+                if (e.type == sf::Event::MouseMoved) {
+                        if (e.mouseMove.x<=(mX+mWidth) && e.mouseMove.x>=mX && e.mouseMove.y>=mY && e.mouseMove.y<=(mY+mHeight)) {
+                                mSprite->setTexture(*mTextureHighlight);
+                        } else {
+                                mSprite->setTexture(*mTexture);
+                        }
+                }
         }
 }
