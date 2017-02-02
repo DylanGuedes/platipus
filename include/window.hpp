@@ -24,6 +24,8 @@ namespace platipus {
                         sf::RenderWindow *mWindow;
                         Hash mOptions;
                         platipus::Level *mCurrentLevel = nullptr;
+                        void handleCommand();
+                        void handleLevelTransition();
         };
 }
 

@@ -6,7 +6,7 @@
 #include <fstream>
 
 namespace platipus {
-        Level::Level(std::string id) : GameObject(), mId(id)
+        Level::Level(platipus::entity::LEVEL_TYPE currLevel) : GameObject(), mId(currLevel)
         {
                 loadLevel();
         }
@@ -18,12 +18,15 @@ namespace platipus {
         void
         Level::loadLevel()
         {
-                std::cout << "loading level..\n";
-                std::string mapPath = "res/maps/" + id();
+                std::string mapPath = "res/maps/" + std::to_string(mId);
                 std::ifstream mapData(mapPath);
+
                 unsigned int entityType;
+                unsigned int next;
 
                 if (mapData.is_open()) {
+                        mapData >> std::hex >> next;
+                        mNextLevel = platipus::entity::LEVEL_TYPE(next);
                         while (mapData >> std::hex >> entityType) {
                                 handleEntityLoad(entityType, &mapData);
                         }
@@ -42,13 +45,36 @@ namespace platipus {
 
                         default:
                                 break;
-
                 }
         }
 
-        std::string
+        platipus::entity::LEVEL_TYPE
         Level::id() const
         {
                 return mId;
+        }
+
+        bool
+        Level::done() const
+        {
+                return mDone;
+        }
+
+        void
+        Level::updateNextLevel(platipus::entity::LEVEL_TYPE next)
+        {
+                mNextLevel = next;
+        }
+
+        void
+        Level::finish()
+        {
+                mDone = true;
+        }
+
+        platipus::entity::LEVEL_TYPE
+        Level::nextLevel() const
+        {
+                return mNextLevel;
         }
 }

@@ -3,11 +3,9 @@
 
 #include "window.hpp"
 #include <SFML/Graphics.hpp>
+#include <queue>
 
 namespace platipus {
-        namespace entity {
-                const unsigned int TRANSITION_BUTTON = 0xFF0;
-        }
         class Game {
                 public:
                         Game();
